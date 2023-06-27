@@ -22,6 +22,7 @@ import NodeInfo from './NodeInfo'
 import TemplateModule from './TemplateModule'
 import Transfer from './Transfer'
 import Upgrade from './Upgrade'
+import Map from './Map';
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -65,6 +66,7 @@ function Main() {
       <Container>
         <Grid stackable columns="equal">
           <Grid.Row stretched>
+            <Map />
             <NodeInfo />
             <Metadata />
             <BlockNumber />
