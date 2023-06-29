@@ -77,38 +77,39 @@ export function App({
   animationSpeed = 1
 }) {
 
+  const domElementRef = useRef(null);
   const [time, setTime] = useState(0);
   const [animation] = useState({});
   const lastRAFTimestamp = useRef(0);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   if (domElementRef.current) {
-  //     // Your code to execute when the DOM element is available
-  //     if(!timepicker) {
-  //       timepicker = timer.Timepicker();
-  //       document.getElementById('timepicker').appendChild(timepicker.getElement());
-  //       timepicker.show();
-  //     }
+    if (domElementRef.current) {
+      // Your code to execute when the DOM element is available
+      if(!timepicker) {
+        timepicker = timer.Timepicker();
+        document.getElementById('timepicker').appendChild(timepicker.getElement());
+        timepicker.show();
+      }
 
-  //   }
+    }
 
-  //   const animate = (rAFTimestamp=0) => {
-  //     setTime(t => (t + animationSpeed) % loopLength);
-  //       if (timepicker) {
-  //           var elapsedMilliseconds = rAFTimestamp - lastRAFTimestamp.current;
-  //           timepicker.moveClockDateForward(elapsedMilliseconds);
-  //       }
-  //       lastRAFTimestamp.current = rAFTimestamp;
-  //       animation.id = window.requestAnimationFrame(animate);
-  //   };
+    const animate = (rAFTimestamp=0) => {
+      setTime(t => (t + animationSpeed) % loopLength);
+        if (timepicker) {
+            var elapsedMilliseconds = rAFTimestamp - lastRAFTimestamp.current;
+            timepicker.moveClockDateForward(elapsedMilliseconds);
+        }
+        lastRAFTimestamp.current = rAFTimestamp;
+        animation.id = window.requestAnimationFrame(animate);
+    };
 
-  //   animation.id = window.requestAnimationFrame(animate);
-  //   return () => {
-  //     window.cancelAnimationFrame(animation.id);
-  //     clearInterval(intervalId);
-  //   };
-  // }, [animation, animationSpeed, loopLength, domElementRef.current]);
+    animation.id = window.requestAnimationFrame(animate);
+    return () => {
+      window.cancelAnimationFrame(animation.id);
+      clearInterval(intervalId);
+    };
+  }, [animation, animationSpeed, loopLength, domElementRef.current]);
 
   const world_time_starting_point = 1678217326000;
 
@@ -156,7 +157,7 @@ export function App({
       controller={true}
     >
       <Map reuseMaps mapLib={maplibregl} mapStyle={mapStyle} preventStyleDiffing={true} />
-      {/* <div ref={domElementRef} id="timepicker"></div> */}
+      <div ref={domElementRef} id="timepicker"></div>
     </DeckGL>
     
   );
