@@ -3,7 +3,7 @@ import { App } from './map/App';
  
 export default function Main(props) {  
     return (
-        <Modal trigger={<Button>Show Map</Button>}>
+        <Modal style={{ height: '90%', width: '90%' }} trigger={<Button>Show Map</Button>}>
         <Modal.Header>Runtime Metadata</Modal.Header>
         <Modal.Content scrolling>
           <Modal.Description>
