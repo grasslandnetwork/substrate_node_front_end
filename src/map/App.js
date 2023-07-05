@@ -81,9 +81,11 @@ export function App({
   const [time, setTime] = useState(0);
   const [animation] = useState({});
   const lastRAFTimestamp = useRef(0);
+  const [viewState, setViewState] = useState(initialViewState);
 
   useEffect(() => {
 
+    console.log( viewState.pitch );
     if (domElementRef.current) {
       // Your code to execute when the DOM element is available
       if(!timepicker) {
@@ -109,7 +111,7 @@ export function App({
       window.cancelAnimationFrame(animation.id);
       clearInterval(intervalId);
     };
-  }, [animation, animationSpeed, loopLength, domElementRef.current]);
+  }, [animation, animationSpeed, loopLength, domElementRef.current, viewState]);
 
   const world_time_starting_point = 1678217326000;
 
@@ -155,8 +157,14 @@ export function App({
       effects={theme.effects}
       initialViewState={initialViewState}
       controller={true}
+      onViewStateChange={({viewState}) => setViewState(viewState)}
     >
-      <Map reuseMaps mapLib={maplibregl} mapStyle={mapStyle} preventStyleDiffing={true} />
+      <Map 
+        reuseMaps 
+        mapLib={maplibregl} 
+        mapStyle={mapStyle} 
+        preventStyleDiffing={true} 
+        />
       <div ref={domElementRef} id="timepicker"></div>
     </DeckGL>
     
