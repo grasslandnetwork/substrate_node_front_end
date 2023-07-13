@@ -166,6 +166,9 @@ export function App({
         initialViewState={initialViewState} // initialViewState does not inherit from Deckgl so must be added again here
         preventStyleDiffing={true} 
         />
+        <video className='videoTag' autoPlay loop muted width="600px">
+          <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' type='video/mp4' />
+        </video>
       <div ref={domElementRef} id="timepicker"></div>
     </DeckGL>
     
