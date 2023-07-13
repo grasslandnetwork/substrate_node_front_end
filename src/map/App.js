@@ -52,7 +52,8 @@ const INITIAL_VIEW_STATE = {
   latitude: 40.72,
   zoom: 13,
   pitch: 45,
-  bearing: 0
+  bearing: 0,
+  maxPitch: 85
 };
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json';
@@ -85,7 +86,6 @@ export function App({
 
   useEffect(() => {
 
-    console.log( viewState.pitch );
     if (domElementRef.current) {
       // Your code to execute when the DOM element is available
       if(!timepicker) {
@@ -162,7 +162,8 @@ export function App({
       <Map 
         reuseMaps 
         mapLib={maplibregl} 
-        mapStyle={mapStyle} 
+        mapStyle={mapStyle}
+        initialViewState={initialViewState} // initialViewState does not inherit from Deckgl so must be added again here
         preventStyleDiffing={true} 
         />
       <div ref={domElementRef} id="timepicker"></div>
