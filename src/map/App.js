@@ -113,6 +113,20 @@ export function App({
     };
   }, [animation, animationSpeed, loopLength, domElementRef.current, viewState]);
 
+
+  useEffect(() => {
+      const video = document.querySelector('.videoTag');
+
+      navigator.mediaDevices.getUserMedia({ video: true })
+          .then((stream) => {
+              video.srcObject = stream;
+          })
+          .catch((err) => {
+              console.error('Error accessing media devices.', err);
+          });
+  }, []);
+
+
   const world_time_starting_point = 1678217326000;
 
   const layers = [
@@ -166,9 +180,11 @@ export function App({
         initialViewState={initialViewState} // initialViewState does not inherit from Deckgl so must be added again here
         preventStyleDiffing={true} 
         />
-        <video className='videoTag' autoPlay loop muted width="600px">
-          <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' type='video/mp4' />
+        <video className='videoTag'  autoPlay loop muted width="600px">
+         // <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' type='video/mp4' />
         </video>
+
+        
       <div ref={domElementRef} id="timepicker"></div>
     </DeckGL>
     
