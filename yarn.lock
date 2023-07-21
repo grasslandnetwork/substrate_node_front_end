@@ -12833,6 +12833,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-webcam@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "react-webcam@npm:7.1.1"
+  peerDependencies:
+    react: ">=16.2.0"
+    react-dom: ">=16.2.0"
+  checksum: 98310037b477ff8a99ca9ee67151389cbc24fe1d3f2fd5ff8afabca7b703c88d8a4275d85c2f1a4ac428602f4e1f0f9375a23379efc88b6ed88cd25e988a4e65
+  languageName: node
+  linkType: hard
+
 "react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
@@ -14089,6 +14099,7 @@ __metadata:
     react-dom: ^17.0.2
     react-map-gl: ^7.0.0
     react-scripts: ^5.0.0
+    react-webcam: ^7.1.1
     semantic-ui-css: "Semantic-Org/Semantic-UI-CSS#master"
     semantic-ui-react: ^2.1.2
     semistandard: ^16.0.1

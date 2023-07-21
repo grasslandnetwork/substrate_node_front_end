@@ -7,6 +7,8 @@ import DeckGL from '@deck.gl/react';
 import {PolygonLayer} from '@deck.gl/layers';
 import {TripsLayer} from '@deck.gl/geo-layers';
 
+import VideoPlayer from './videoplayer.js';
+
 const timer = require('./timepicker.js');
 let timepicker;
 let startTime = Date.now();
@@ -48,9 +50,9 @@ const DEFAULT_THEME = {
 };
 
 const INITIAL_VIEW_STATE = {
-  longitude: -74,
-  latitude: 40.72,
-  zoom: 13,
+  longitude: -80.994161486526,
+  latitude: 46.489108046890124, 
+  zoom: 16,
   pitch: 45,
   bearing: 0,
   maxPitch: 85
@@ -114,19 +116,6 @@ export function App({
   }, [animation, animationSpeed, loopLength, domElementRef.current, viewState]);
 
 
-  useEffect(() => {
-      const video = document.querySelector('.videoTag');
-
-      navigator.mediaDevices.getUserMedia({ video: true })
-          .then((stream) => {
-              video.srcObject = stream;
-          })
-          .catch((err) => {
-              console.error('Error accessing media devices.', err);
-          });
-  }, []);
-
-
   const world_time_starting_point = 1678217326000;
 
   const layers = [
@@ -180,10 +169,7 @@ export function App({
         initialViewState={initialViewState} // initialViewState does not inherit from Deckgl so must be added again here
         preventStyleDiffing={true} 
         />
-        <video className='videoTag'  autoPlay loop muted width="600px">
-         // <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' type='video/mp4' />
-        </video>
-
+        <VideoPlayer></VideoPlayer>
         
       <div ref={domElementRef} id="timepicker"></div>
     </DeckGL>
