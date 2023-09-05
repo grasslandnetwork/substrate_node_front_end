@@ -2,8 +2,20 @@ import React, {useEffect, useState} from 'react';
 import Webcam from "react-webcam";
 
 function Main(props) {
-  const [selectedOption, setSelectedOption] = useState("webcam");
+    const [selectedOption, setSelectedOption] = useState("webcam");
+    const [videoUrl, setVideoUrl] = useState("");  // Add this line
 
+
+    const handleInputChange = (event) => {
+        setVideoUrl(event.target.value);
+    }
+
+    const handleButtonClick = () => {
+        fetch(`http://127.0.0.1:5000/change_video_source?video_url=${videoUrl}`)
+            .catch(err => console.error(err));
+    }
+
+    
   useEffect(() => {
     const video = document.querySelector('.videoTag');
 
@@ -17,17 +29,17 @@ function Main(props) {
   }, []);
 
   return (
-    <div>
-      <input type="radio" value="webcam" checked={selectedOption === "webcam"} onChange={(e) => setSelectedOption(e.target.value)} /> Webcam
-      <input type="radio" value="youtube" checked={selectedOption === "youtube"} onChange={(e) => setSelectedOption(e.target.value)} /> Youtube
-      <input type="radio" value="rtsp" checked={selectedOption === "rtsp"} onChange={(e) => setSelectedOption(e.target.value)} /> RTSP
-    {selectedOption === "webcam" && <Webcam />}
-    {selectedOption === "youtube" && <iframe width="560" height="315" src="YOUTUBE_LINK" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>}
-    {selectedOption === "rtsp" && 
-    <video className='videoTag' autoPlay loop muted width="600px">
-    <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' type='video/mp4' />
-    </video>
-    }
+      <div>
+          <input type="text" value={videoUrl} onChange={handleInputChange} />
+          <button onClick={handleButtonClick}>Change Video Source</button>
+          <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+              <option value="webcam">Webcam</option>
+              <option value="rtsp">RTSP</option>
+          </select>
+          
+
+      {selectedOption === "webcam" && <Webcam />}
+      {selectedOption == "rtsp" && <img src="http://127.0.0.1:5000/video_feed" style={{ width: '600px'}} alt="Video Stream" /> }
     </div>
   )
 }
