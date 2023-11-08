@@ -1,0 +1,10 @@
+version: "0.1"
+services:
+  gui:
+    build: .
+    # depends_on:
+    #   - node
+    command: sh -c "yarn start"
+    working_dir: /app
+    ports:
+      - '8000:8000'
