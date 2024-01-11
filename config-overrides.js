@@ -7,6 +7,5 @@ module.exports = function override(config, env) {
     },
   }
   config.plugins.push(new NodePolyfillPlugin())
-  config.output.publicPath = ''
   return config
 }
